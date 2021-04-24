@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Dirt : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int PosX { get; set; }
+    public int PosY { get; set; }
+
+    public Composition Composition { get; set; }
+
+    void OnMouseOver()
     {
-        
+        Debug.Log("I am dirty");
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnMouseExit()
     {
-        
+        Debug.Log("Not dirty anymore");
     }
 }
