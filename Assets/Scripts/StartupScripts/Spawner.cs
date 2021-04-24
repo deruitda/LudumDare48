@@ -6,15 +6,13 @@ public static class Spawner
 {
     public static GameObject[,] SpawnDirtTerrain(GameObject prefab, int width, int depth)
     {
-        int half = width / 2; // TODO what if this is an odd number?
-
         GameObject[,] terrainTiles = new GameObject[width, depth];
 
         for (int w = 0; w < width; w++)
             for (int d = 0; d < depth; d++)
             {
                 var gO = GameObject.Instantiate(prefab);
-                gO.transform.position = new Vector2(w - half, -d);
+                gO.transform.position = new Vector2(w, -d);
                 terrainTiles[w, d] = gO;
             }
 

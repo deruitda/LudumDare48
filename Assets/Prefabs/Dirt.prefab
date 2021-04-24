@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1651372750881138715}
-  _nutritionalValue: 1
+  _nutritionalValue: 0
   _defaultSprite: {fileID: 21300000, guid: 65ab827466718074d9854262583eef1b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 1ec65dae2cb7c8047810437f4d583283, type: 3}
 --- !u!61 &5773488181609148393
