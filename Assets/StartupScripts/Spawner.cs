@@ -13,4 +13,9 @@ public static class Spawner
             for (int d = 0; d > -depth; d--)
                 GameObject.Instantiate(prefab).transform.position = new Vector2(w, d);
     }
+
+    public static void SpawnPrefab(GameObject prefab, float xPos, float yPos)
+    {
+        GameObject.Instantiate(prefab).transform.position = new Vector2(xPos, yPos);
+    }
 }
