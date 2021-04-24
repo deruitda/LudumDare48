@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _dirtPrefab;
+    private GameObject[] _dirtPrefabs;
     [SerializeField]
     private GameObject _seedPrefab;
     [SerializeField]
@@ -18,15 +19,23 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private float _seedYPos;
 
-    private GameObject[,] _terrainTiles;
-    private GameObject _seed;
+    public GameObject[,] TerrainTiles { get; set; }
+    public GameObject Seed { get; set; }
 
     void Start()
     {
+        ValidatePrefabs();
+
         // spawn de dirt
-        _terrainTiles = Spawner.SpawnDirtTerrain(_dirtPrefab, _dirtWidth, _dirtDepth);
+        TerrainTiles = Spawner.SpawnDirtTerrain(_dirtPrefabs.ToList(), _dirtWidth, _dirtDepth);
 
         // spawn de seed
-        _seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
+        Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
+    }
+
+    private void ValidatePrefabs()
+    {
+        if(_dirtPrefabs.Any(p => p.GetComponent<BaseTile>() == null))
+            throw new MissingComponentException("Prefab is missing BaseTile component");
     }
 }
