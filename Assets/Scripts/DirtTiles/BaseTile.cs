@@ -19,13 +19,13 @@ public abstract class BaseTile : MonoBehaviour
         PosY = y;
     }
 
-    void OnMouseOver()
+    void OnMouseEnter()
     {
-        Debug.Log("I am dirty");
+        SpriteRenderer.sprite = SelecetedSprite;
     }
 
     void OnMouseExit()
     {
-        Debug.Log("Not dirty anymore");
+        SpriteRenderer.sprite = DefaultSprite;
     }
 }
