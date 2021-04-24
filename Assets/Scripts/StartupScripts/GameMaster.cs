@@ -35,7 +35,9 @@ public class GameMaster : MonoBehaviour
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
 
-        spawnTree(15);
+        TreeSpawner ts = new TreeSpawner(_treePreFab, _seedXPos, _seedYPos);
+        ts.SpawnTree(15);
+
     }
 
     private void ValidatePrefabs()
@@ -44,14 +46,4 @@ public class GameMaster : MonoBehaviour
             throw new MissingComponentException("Prefab is missing BaseTile component");
     }
 
-    private void spawnTree(int nutrientScore)
-    {
-        int seedYPos = (int) Math.Floor(_seedYPos);
-        int i = 0;
-        while(i < nutrientScore)
-        {
-            Spawner.SpawnPrefab(_treePreFab, _seedXPos, seedYPos + i);
-            i++;
-        }
-    }
 }
