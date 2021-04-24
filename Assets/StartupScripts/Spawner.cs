@@ -4,18 +4,28 @@ using UnityEngine;
 
 public static class Spawner
 {
-    public static void SpawnDirtTerrain(GameObject prefab, int width, int depth)
+    public static GameObject[,] SpawnDirtTerrain(GameObject prefab, int width, int depth)
     {
-        int maxRight = width / 2; // TODO what if this is an odd number?
-        int maxLeft = -maxRight;
+        int half = width / 2; // TODO what if this is an odd number?
 
-        for (int w = maxLeft; w < maxRight; w++)
-            for (int d = 0; d > -depth; d--)
-                GameObject.Instantiate(prefab).transform.position = new Vector2(w, d);
+        GameObject[,] terrainTiles = new GameObject[width, depth];
+
+        for (int w = 0; w < width; w++)
+            for (int d = 0; d < depth; d++)
+            {
+                var gO = GameObject.Instantiate(prefab);
+                gO.transform.position = new Vector2(w - half, -d);
+                terrainTiles[w, d] = gO;
+            }
+
+        return terrainTiles;
     }
 
-    public static void SpawnPrefab(GameObject prefab, float xPos, float yPos)
+    public static GameObject SpawnPrefab(GameObject prefab, float xPos, float yPos)
     {
-        GameObject.Instantiate(prefab).transform.position = new Vector2(xPos, yPos);
+        var gO = GameObject.Instantiate(prefab);
+        gO.transform.position = new Vector2(xPos, yPos);
+        
+        return gO;
     }
 }
