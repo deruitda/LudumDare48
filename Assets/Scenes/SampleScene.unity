@@ -236,6 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dirtPrefab: {fileID: 426945897305095442, guid: a1bf4d495fd72654999eaaed15cb2a8d, type: 3}
+  _dirtWidth: 20
+  _dirtHeight: 20
 --- !u!4 &1149778110
 Transform:
   m_ObjectHideFlags: 0
