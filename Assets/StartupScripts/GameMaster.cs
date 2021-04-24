@@ -9,11 +9,11 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private int _dirtWidth;
     [SerializeField]
-    private int _dirtHeight;
+    private int _dirtDepth;
     // Start is called before the first frame update
     void Start()
     {
         // spawn de dirt
-        Spawner.SpawnRectangle(_dirtPrefab, _dirtWidth, _dirtHeight);
+        Spawner.SpawnDirtTerrain(_dirtPrefab, _dirtWidth, _dirtDepth);
     }
 }

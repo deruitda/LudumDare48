@@ -4,10 +4,13 @@ using UnityEngine;
 
 public static class Spawner
 {
-    public static void SpawnRectangle(GameObject prefab, int width, int height)
+    public static void SpawnDirtTerrain(GameObject prefab, int width, int depth)
     {
-        for (int w = 0; w < width; w++)
-            for (int h = 0; h < height; h++)
-                GameObject.Instantiate(prefab).transform.position = new Vector2(w, h);
+        int maxRight = width / 2; // TODO what if this is an odd number?
+        int maxLeft = -maxRight;
+
+        for (int w = maxLeft; w < maxRight; w++)
+            for (int d = 0; d > -depth; d--)
+                GameObject.Instantiate(prefab).transform.position = new Vector2(w, d);
     }
 }
