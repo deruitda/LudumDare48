@@ -18,15 +18,19 @@ namespace Assets.Scripts.TreeScripts
         public void grow()
         {
             _height++;
-            Spawner.SpawnPrefab(_treeConfig.treePreFab, _treeConfig.seedXPos, _treeConfig.seedYPos + _height);
 
             if(_height == _treeConfig.initialForkSize)
             {
                 createFork();
             }
-            if(_height > _treeConfig.initialForkSize)
+            else if(_height > _treeConfig.initialForkSize)
             {
                 _treeFork.grow();
+            }
+            else
+            {
+                // build trunk
+                Spawner.SpawnPrefab(_treeConfig.treePreFab, _treeConfig.seedXPos, _treeConfig.seedYPos + _height);
             }
 
             growBranches();

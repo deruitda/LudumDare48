@@ -63,7 +63,7 @@ namespace Assets.Scripts.TreeScripts
             possibleBranchDirections.Remove(firstBranchDirection);
 
             int random2 = UnityEngine.Random.Range(0, possibleBranchDirections.Count());
-            BranchDirection secondBranchDirection = possibleBranchDirections[random];
+            BranchDirection secondBranchDirection = possibleBranchDirections[random2];
             _branch2 = new Branch(_treeConfig, _branchBase, secondBranchDirection);
         }
         public void grow()
