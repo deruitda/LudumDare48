@@ -44,8 +44,8 @@ public class GameMaster : MonoBehaviour
             seedYPos = _seedYPos,
             chanceOfCreatingABranch = 0.1,
             chanceOfBranchGrowing = 0.5,
-            initialForkSize = 5,
-            minSizeOfBranchBeforeFork = 20,
+            minSizeOfTreeBeforeForking = 15,
+            minSizeOfBranchBeforeFork = 12,
             chanceOfCreatingAFork = 0.4
         };
 
