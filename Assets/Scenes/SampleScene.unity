@@ -298,7 +298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1149778110}
   - component: {fileID: 1149778109}
-  - component: {fileID: 1149778111}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -341,16 +340,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1149778111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149778108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9828ce6a3dbafd5429aeb0bdbdd90e1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _treePreFab: {fileID: 426945897305095442, guid: e7e093d3547851d40a60d3e8f99a8c63, type: 3}

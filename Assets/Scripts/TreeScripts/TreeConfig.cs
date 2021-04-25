@@ -16,6 +16,7 @@ namespace Assets.Scripts.TreeScripts {
         public double chanceOfCreatingABranch { get; set; }
         public double chanceOfBranchGrowing { get; set; }
 
+        public double initialForkSize { get; set; }
         public TreeConfig()
         {
 

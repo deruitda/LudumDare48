@@ -8,8 +8,14 @@ namespace Assets.Scripts.TreeScripts
 {
     enum BranchDirection
     {
+        UP,
+        DOWN,
         LEFT,
-        RIGHT
+        RIGHT,
+        UP_LEFT,
+        UP_RIGHT,
+        DOWN_LEFT,
+        DOWN_RIGHT
     }
 
     class Branch
@@ -18,33 +24,33 @@ namespace Assets.Scripts.TreeScripts
         private float _growMagnitude = 0;
         private BranchBase _branchBase;
         private TreeConfig _treeConfig;
-        public Branch(TreeConfig treeConfig, BranchBase branchBase)
+        public Branch(TreeConfig treeConfig, BranchBase branchBase, BranchDirection branchDirection)
         {
             _treeConfig = treeConfig;
             _branchBase = branchBase;
-
-            //Decide direction of branch
-            if (Random.Range(0, 2) == 1)
-            {
-                _branchDirection = BranchDirection.LEFT;
-            } else
-            {
-                _branchDirection = BranchDirection.RIGHT;
-            }
+            _branchDirection = branchDirection;
         }
 
         public void grow()
         {
-            int rand = Random.Range(0, 100);
-            if(rand <= _treeConfig.chanceOfBranchGrowing * 100)
+            _growMagnitude++;
+
+            switch (_branchDirection)
             {
-
-                int growDirectionMultiplier = _branchDirection == BranchDirection.RIGHT ? 1 : -1;
-                _growMagnitude++;
-
-                Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchBase.posX  + (_growMagnitude * growDirectionMultiplier), _branchBase.posY);
+                case BranchDirection.LEFT:
+                case BranchDirection.RIGHT:    
+                    int growDirectionMultiplier = _branchDirection == BranchDirection.RIGHT ? 1 : -1;
+                    Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchBase.posX + (_growMagnitude * growDirectionMultiplier), _branchBase.posY);
+                    break;
+                case BranchDirection.UP:
+                    Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchBase.posX, _growMagnitude + _branchBase.posY);
+                    break;
+                case BranchDirection.UP_LEFT:
+                case BranchDirection.UP_RIGHT:
+                    int growDirectionMultiplierDiag = _branchDirection == BranchDirection.UP_RIGHT ? 1 : -1;
+                    Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchBase.posX + (_growMagnitude * growDirectionMultiplierDiag), _branchBase.posY + _growMagnitude);
+                    break;
             }
-
         }
 
     }

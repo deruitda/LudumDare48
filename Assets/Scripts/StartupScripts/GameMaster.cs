@@ -43,11 +43,12 @@ public class GameMaster : MonoBehaviour
             seedXPos = _seedXPos,
             seedYPos = _seedYPos,
             chanceOfCreatingABranch = 0.1,
-            chanceOfBranchGrowing = 0.5
+            chanceOfBranchGrowing = 0.5,
+            initialForkSize = 5
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);
-        ts.SpawnTree(300);
+        ts.SpawnTree(15);
 
     }
 

@@ -8,6 +8,7 @@ namespace Assets.Scripts.TreeScripts
         private List<Branch> _branches;
         private TreeConfig _treeConfig;
         private float _height;
+        private TreeFork _treeFork;
         public Tree(TreeConfig treeConfig)
         {
             _treeConfig = treeConfig;
@@ -19,20 +20,42 @@ namespace Assets.Scripts.TreeScripts
             _height++;
             Spawner.SpawnPrefab(_treeConfig.treePreFab, _treeConfig.seedXPos, _treeConfig.seedYPos + _height);
 
+            if(_height == _treeConfig.initialForkSize)
+            {
+                createFork();
+            }
+            if(_height > _treeConfig.initialForkSize)
+            {
+                _treeFork.grow();
+            }
+
             growBranches();
 
-            int rand = Random.Range(0, 100);
-            if (rand <= _treeConfig.chanceOfCreatingABranch * 100)
-            {
-                createBranch();
-            }
+            //int rand = Random.Range(0, 100);
+            //if (rand <= _treeConfig.chanceOfCreatingABranch * 100)
+            //{
+            //    createBranch();
+            //}
+        }
+
+        private void createFork()
+        {
+
+            BranchBase branchBase = new BranchBase(_treeConfig.seedXPos, _height);
+            _treeFork = new TreeFork(_treeConfig, BranchDirection.UP, branchBase);
         }
 
         private void createBranch()
         {
+            BranchDirection branchDirection = BranchDirection.RIGHT;
+            //Decide direction of branch
+            if (Random.Range(0, 2) == 1)
+            {
+                branchDirection = BranchDirection.LEFT;
+            }
             BranchBase branchBase = new BranchBase(_treeConfig.seedXPos, _height);
 
-            _branches.Add(new Branch(_treeConfig, branchBase));
+            _branches.Add(new Branch(_treeConfig, branchBase, branchDirection));
         }
 
         private void growBranches()
