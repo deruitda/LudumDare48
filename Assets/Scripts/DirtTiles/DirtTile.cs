@@ -7,18 +7,14 @@ public class DirtTile : BaseTile
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
-    private int _nutritionalValue;
-    [SerializeField]
-    private Sprite _defaultSprite;
-    [SerializeField]
-    private Sprite _selectedSprite;
+    private int _nutritionalValue;   
     private DirtComposition _dirtComposition;
 
     public override ISoilComposition SoilComposition { get => _dirtComposition; set => _dirtComposition = value as DirtComposition; }
     public override SpriteRenderer SpriteRenderer { get => _spriteRenderer; set => _spriteRenderer = value; }
-    public override Sprite SelecetedSprite { get => _selectedSprite; }
+    public override Sprite SelecetedSprite { get => GameMaster.SpriteRepo.DirtSelectedSprite; }
     
-    public override Sprite DefaultSprite { get => _defaultSprite; }
+    public override Sprite DefaultSprite { get => GameMaster.SpriteRepo.DirtDefaultSprite; }
 
     public DirtTile(int x, int y) : base(x, y)
     {

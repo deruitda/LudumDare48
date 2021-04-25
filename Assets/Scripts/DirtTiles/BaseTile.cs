@@ -14,7 +14,7 @@ public abstract class BaseTile : MonoBehaviour
     public abstract SpriteRenderer SpriteRenderer { get; set; }
     public abstract ISoilComposition SoilComposition { get; set; }
     public Dictionary<NeighborDirections, BaseTile> Neighbors { get; set; }
-    private GameMaster _gameMaster;
+    protected GameMaster GameMaster;
     private const int MAX_SELECTION_DISTANCE = 1;
     private Color DefaultColor;
 
@@ -26,7 +26,7 @@ public abstract class BaseTile : MonoBehaviour
 
     void Awake()
     {
-        _gameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+        GameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
         DefaultColor = SpriteRenderer.color;
     }
 
@@ -72,8 +72,8 @@ public abstract class BaseTile : MonoBehaviour
                 {
                     if (tile.IsValidTileSelection())
                     {
-                        _gameMaster.CurrentSelectedTile.DeselectTile();
-                        tile.SelectTile();                        
+                        GameMaster.CurrentSelectedTile.DeselectTile();
+                        tile.SelectTile();
                     }
                 }
             }
@@ -83,8 +83,8 @@ public abstract class BaseTile : MonoBehaviour
     public void SelectTile()
     {
         IsRooted = true;
-        SpriteRenderer.sprite = _gameMaster.SpriteRepo.RootSprite;
-        _gameMaster.CurrentSelectedTile = this;
+        SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
+        GameMaster.CurrentSelectedTile = this;
         HighlightNeighbors();
     }
 
@@ -107,11 +107,11 @@ public abstract class BaseTile : MonoBehaviour
     {
         int selectedX = PosX;
         int selectedY = PosY;
-        int currentX = _gameMaster.CurrentSelectedTile.PosX;
-        int currentY = _gameMaster.CurrentSelectedTile.PosY;
+        int currentX = GameMaster.CurrentSelectedTile.PosX;
+        int currentY = GameMaster.CurrentSelectedTile.PosY;
 
         // if the tile is too far away, return false;
-        if ( Mathf.Abs(selectedX - currentX) > MAX_SELECTION_DISTANCE 
+        if (Mathf.Abs(selectedX - currentX) > MAX_SELECTION_DISTANCE
             || Mathf.Abs(selectedY - currentY) > MAX_SELECTION_DISTANCE)
             return false;
 
@@ -127,7 +127,8 @@ public abstract class BaseTile : MonoBehaviour
     {
         foreach (var neighbor in Neighbors)
         {
-            neighbor.Value.SpriteRenderer.color = new Color(92, 252, 71, .5f);
+            if (!neighbor.Value.IsRooted)
+                neighbor.Value.SpriteRenderer.color = new Color(92, 252, 71, .5f);
         }
     }
 
