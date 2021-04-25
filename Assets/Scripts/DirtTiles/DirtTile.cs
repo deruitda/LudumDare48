@@ -17,6 +17,7 @@ public class DirtTile : BaseTile
     public override ISoilComposition SoilComposition { get => _dirtComposition; set => _dirtComposition = value as DirtComposition; }
     public override SpriteRenderer SpriteRenderer { get => _spriteRenderer; set => _spriteRenderer = value; }
     public override Sprite SelecetedSprite { get => _selectedSprite; }
+    
     public override Sprite DefaultSprite { get => _defaultSprite; }
 
     public DirtTile(int x, int y) : base(x, y)
