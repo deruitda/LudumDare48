@@ -326,6 +326,7 @@ MonoBehaviour:
   _dirtDepth: 10
   _seedXPos: 10
   _seedYPos: 0.5
+  _spriteRepoPrefab: {fileID: 857086350199695392, guid: 6638225e8aad5c241b993584a2499af0, type: 3}
 --- !u!4 &1149778110
 Transform:
   m_ObjectHideFlags: 0
