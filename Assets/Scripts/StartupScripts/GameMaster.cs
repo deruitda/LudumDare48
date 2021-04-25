@@ -18,7 +18,7 @@ public class GameMaster : MonoBehaviour
     private float _seedXPos;
     [SerializeField]
     private float _seedYPos;
-
+    public BaseTile CurrentSelectedTile { get; set; }
     public GameObject[,] TerrainTiles { get; set; }
     public GameObject Seed { get; set; }
 
@@ -28,6 +28,8 @@ public class GameMaster : MonoBehaviour
 
         // spawn de dirt
         TerrainTiles = Spawner.SpawnDirtTerrain(_dirtPrefabs.ToList(), _dirtWidth, _dirtDepth);
+
+        CurrentSelectedTile = TerrainTiles[10, 0].GetComponent<BaseTile>();
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
