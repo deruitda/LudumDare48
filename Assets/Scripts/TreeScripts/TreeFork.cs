@@ -37,7 +37,7 @@ namespace Assets.Scripts.TreeScripts
                     break;
                 case BranchDirection.UP_LEFT:
                     possibleBranchDirections.Add(BranchDirection.UP);
-                    possibleBranchDirections.Add(BranchDirection.RIGHT);
+                    possibleBranchDirections.Add(BranchDirection.LEFT);
                     break;
                 case BranchDirection.UP_RIGHT:
                     possibleBranchDirections.Add(BranchDirection.UP);
