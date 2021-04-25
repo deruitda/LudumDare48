@@ -12,6 +12,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private GameObject _treePreFab;
     [SerializeField]
+    private GameObject _leavePreFab;
+    [SerializeField]
     private GameObject _seedPrefab;
     [SerializeField]
     private int _dirtWidth;
@@ -46,7 +48,8 @@ public class GameMaster : MonoBehaviour
             chanceOfBranchGrowing = 0.5,
             minSizeOfTreeBeforeForking = 15,
             minSizeOfBranchBeforeFork = 12,
-            chanceOfCreatingAFork = 0.4
+            chanceOfCreatingAFork = 0.4,
+            percentageOfTreeHasLeaves = 0.3
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);

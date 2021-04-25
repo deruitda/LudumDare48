@@ -14,12 +14,12 @@ namespace Assets.Scripts.TreeScripts
             _treeConfig = treeConfig;
         }
 
-        public void grow()
+        public void grow(bool withLeaves = false)
         {
             _height++;
             if(_forkCreated)
             {
-                _treeFork.grow();
+                _treeFork.grow(withLeaves);
             }
             else if(_height >= _treeConfig.minSizeOfBranchBeforeFork)
             {

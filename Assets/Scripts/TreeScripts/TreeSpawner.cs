@@ -9,10 +9,12 @@ namespace Assets.Scripts.TreeScripts
     {
         private int _nutrientScore;
         private Tree _tree;
+        private TreeConfig _treeConfig;
         public TreeSpawner(TreeConfig treeConfig)
         {
 
             _tree = new Tree(treeConfig);
+            _treeConfig = treeConfig;
         }
 
         public void SpawnTree(int nutrientScore)
@@ -21,7 +23,13 @@ namespace Assets.Scripts.TreeScripts
             int i = 0;
             while (i < nutrientScore)
             {
-                _tree.grow();
+                if(i / nutrientScore >_treeConfig.percentageOfTreeHasLeaves)
+                {
+                    _tree.grow(true);
+                } else
+                {
+                    _tree.grow();
+                }
                 i++;
             }
         }

@@ -66,14 +66,14 @@ namespace Assets.Scripts.TreeScripts
             BranchDirection secondBranchDirection = possibleBranchDirections[random2];
             _branch2 = new Branch(_treeConfig, _branchBase, secondBranchDirection);
         }
-        public void grow()
+        public void grow(bool withLeaves)
         {
-            growBranches();
+            growBranches(withLeaves);
         }
-        private void growBranches()
+        private void growBranches(bool withLeaves)
         {
-            _branch1.grow();
-            _branch2.grow();
+            _branch1.grow(withLeaves);
+            _branch2.grow(withLeaves);
         }
     }
 }

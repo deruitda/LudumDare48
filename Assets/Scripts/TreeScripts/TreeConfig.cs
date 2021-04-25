@@ -10,6 +10,8 @@ namespace Assets.Scripts.TreeScripts {
     {
         public GameObject treePreFab { get; set; }
         public GameObject branchPreFab { get; set; }
+        public GameObject leavesPreFab { get; set; }
+
         public float seedXPos { get; set; }
         public float seedYPos { get; set; }
 
@@ -19,6 +21,7 @@ namespace Assets.Scripts.TreeScripts {
         public double minSizeOfTreeBeforeForking { get; set; }
         public double minSizeOfBranchBeforeFork { get; set; }
         public double chanceOfCreatingAFork { get; set; }
+        public double percentageOfTreeHasLeaves { get; set; }
         public TreeConfig()
         {
 

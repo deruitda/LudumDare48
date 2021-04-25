@@ -35,12 +35,12 @@ namespace Assets.Scripts.TreeScripts
             _branchTip = new BranchBase(branchBase.posX, branchBase.posY);
         }
 
-        public void grow()
+        public void grow(bool withLeaves)
         {
             _growMagnitude++;
             if(_branchForked)
             {
-                _treeFork.grow();
+                _treeFork.grow(withLeaves);
             }
             else if (_growMagnitude > _treeConfig.minSizeOfBranchBeforeFork)
             {
@@ -51,14 +51,14 @@ namespace Assets.Scripts.TreeScripts
                     createFork();
                 } else
                 {
-                    growBranch();
+                    growBranch(withLeaves);
                 }
             } else {
-                growBranch();
+                growBranch(withLeaves);
             }
         }
 
-        private void growBranch()
+        private void growBranch(bool withLeaves)
         {
 
             //grow our branches
