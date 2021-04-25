@@ -35,7 +35,7 @@ public class GameMaster : MonoBehaviour
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
 
-        TreeSpawner ts = new TreeSpawner(_treePreFab, _seedXPos, _seedYPos);
+        TreeSpawner ts = new TreeSpawner(_treePreFab, _treePreFab, _seedXPos, _seedYPos);
         ts.SpawnTree(15);
 
     }
