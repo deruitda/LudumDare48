@@ -8,6 +8,7 @@ public abstract class BaseTile : MonoBehaviour
     public int PosX { get; set; }
     public int PosY { get; set; }
     public bool IsRooted { get; set; }
+    public bool[] AdjacentRoots { get; set; }
     public abstract Sprite SelecetedSprite { get; }
     public abstract Sprite DefaultSprite { get; }
     public abstract SpriteRenderer SpriteRenderer { get; set; }
@@ -15,6 +16,9 @@ public abstract class BaseTile : MonoBehaviour
     private GameMaster _gameMaster;
     private const int MAX_SELECTION_DISTANCE = 1;
     public abstract ISoilComposition SoilComposition { get; set; }
+    public Dictionary<NeighborDirections, BaseTile> Neighbors { get; set; }
+
+    private Color DefaultColor;
 
     public BaseTile(int x, int y)
     {
@@ -27,6 +31,7 @@ public abstract class BaseTile : MonoBehaviour
         // TODO: Cache these somewhere so this isn't done every time we create a tile
         _spriteRepository = GameObject.Find("SpriteRepo").GetComponent<SpriteRepository>();
         _gameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+        DefaultColor = SpriteRenderer.color;
     }
 
     void OnMouseEnter()
@@ -35,6 +40,11 @@ public abstract class BaseTile : MonoBehaviour
             return;
 
         SpriteRenderer.sprite = SelecetedSprite;
+
+        foreach(var neighbor in Neighbors)
+        {
+            neighbor.Value.SpriteRenderer.color = Color.red;
+        }
     }
 
     void OnMouseExit()
@@ -43,6 +53,11 @@ public abstract class BaseTile : MonoBehaviour
             return;
 
         SpriteRenderer.sprite = DefaultSprite;
+
+        foreach (var neighbor in Neighbors)
+        {
+            neighbor.Value.SpriteRenderer.color = DefaultColor;
+        }
     }
 
 
