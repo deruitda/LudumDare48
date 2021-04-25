@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
@@ -18,20 +19,27 @@ public class GameMaster : MonoBehaviour
     private float _seedXPos;
     [SerializeField]
     private float _seedYPos;
+    [SerializeField]
+    private GameObject _spriteRepoPrefab;
+
+    public SpriteRepository SpriteRepo { get; private set; }
     public BaseTile CurrentSelectedTile { get; set; }
     public GameObject[,] TerrainTiles { get; set; }
     public GameObject Seed { get; set; }
 
+    public 
+
     void Start()
     {
         ValidatePrefabs();
-
+        GameObject.Instantiate(_spriteRepoPrefab);
+        SpriteRepo = _spriteRepoPrefab.GetComponent<SpriteRepository>();
         // spawn de dirt
         TerrainTiles = Spawner.SpawnDirtTerrain(_dirtPrefabs.ToList(), _dirtWidth, _dirtDepth);
 
         BuildTileNeighborGraph();
 
-        CurrentSelectedTile = TerrainTiles[10, 0].GetComponent<BaseTile>();
+        TerrainTiles[10, 0].GetComponent<BaseTile>().SelectTile();
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
@@ -46,8 +54,6 @@ public class GameMaster : MonoBehaviour
             {
                 var currentTile = TerrainTiles[x, y].GetComponent<BaseTile>();
                 currentTile.Neighbors = new Dictionary<NeighborDirections, BaseTile>();
-
-                Debug.Log($"X:{x} Y:{y}");
 
                 if (x > 0)
                     currentTile.Neighbors[NeighborDirections.LEFT] = TerrainTiles[x - 1, y].GetComponent<BaseTile>();

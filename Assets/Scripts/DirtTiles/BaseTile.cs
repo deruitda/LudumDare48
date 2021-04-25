@@ -12,12 +12,10 @@ public abstract class BaseTile : MonoBehaviour
     public abstract Sprite SelecetedSprite { get; }
     public abstract Sprite DefaultSprite { get; }
     public abstract SpriteRenderer SpriteRenderer { get; set; }
-    private SpriteRepository _spriteRepository;
-    private GameMaster _gameMaster;
-    private const int MAX_SELECTION_DISTANCE = 1;
     public abstract ISoilComposition SoilComposition { get; set; }
     public Dictionary<NeighborDirections, BaseTile> Neighbors { get; set; }
-
+    private GameMaster _gameMaster;
+    private const int MAX_SELECTION_DISTANCE = 1;
     private Color DefaultColor;
 
     public BaseTile(int x, int y)
@@ -26,10 +24,8 @@ public abstract class BaseTile : MonoBehaviour
         PosY = y;
     }
 
-    void Start()
+    void Awake()
     {
-        // TODO: Cache these somewhere so this isn't done every time we create a tile
-        _spriteRepository = GameObject.Find("SpriteRepo").GetComponent<SpriteRepository>();
         _gameMaster = GameObject.Find("GameMaster").GetComponent<GameMaster>();
         DefaultColor = SpriteRenderer.color;
     }
@@ -74,43 +70,43 @@ public abstract class BaseTile : MonoBehaviour
                 // if we hit a tile, root it
                 if (tile != null)
                 {
-                    if (IsValidTileSelection(tile))
+                    if (tile.IsValidTileSelection())
                     {
-                        DeselectTile(_gameMaster.CurrentSelectedTile);
-                        SelectTile(tile);                        
+                        _gameMaster.CurrentSelectedTile.DeselectTile();
+                        tile.SelectTile();                        
                     }
                 }
             }
         }
     }
 
-    public void SelectTile(BaseTile tile)
+    public void SelectTile()
     {
-        tile.IsRooted = true;
-        tile.SpriteRenderer.sprite = _spriteRepository.RootSprite;
-        _gameMaster.CurrentSelectedTile = tile;
-        tile.HighlightNeighbors();
+        IsRooted = true;
+        SpriteRenderer.sprite = _gameMaster.SpriteRepo.RootSprite;
+        _gameMaster.CurrentSelectedTile = this;
+        HighlightNeighbors();
     }
 
-    public void DeselectTile(BaseTile tile)
+    public void DeselectTile()
     {
-        tile.UnHighlightNeighbors();
+        UnHighlightNeighbors();
     }
 
-    private bool IsValidTileSelection(BaseTile selectedTile)
+    private bool IsValidTileSelection()
     {
         // can't select already selected tile
-        if (selectedTile.IsRooted)
+        if (IsRooted)
             return false;
 
         // return if the tile is adjacent
-        return IsTileAdjacent(selectedTile);
+        return IsTileAdjacentToCurrent();
     }
 
-    private bool IsTileAdjacent(BaseTile selectedTile)
+    private bool IsTileAdjacentToCurrent()
     {
-        int selectedX = selectedTile.PosX;
-        int selectedY = selectedTile.PosY;
+        int selectedX = PosX;
+        int selectedY = PosY;
         int currentX = _gameMaster.CurrentSelectedTile.PosX;
         int currentY = _gameMaster.CurrentSelectedTile.PosY;
 
@@ -131,7 +127,7 @@ public abstract class BaseTile : MonoBehaviour
     {
         foreach (var neighbor in Neighbors)
         {
-            neighbor.Value.SpriteRenderer.color = Color.red;
+            neighbor.Value.SpriteRenderer.color = new Color(92, 252, 71, .5f);
         }
     }
 
