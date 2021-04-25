@@ -5,33 +5,26 @@ namespace Assets.Scripts.TreeScripts
 {
     public class Tree
     {
-        private GameObject _treePreFab;
-        private GameObject _branchPreFab;
-
-        private float _seedXPos;
-        private float _seedYPos;
+        private double _chanceOfCreatingABranch = 0.1;
 
         private List<Branch> _branches;
+        private TreeConfig _treeConfig;
         private float _height;
-        public Tree(GameObject treePreFab, GameObject branchPreFab, float seedXPos = 0, float seedYPos = 0)
+        public Tree(TreeConfig treeConfig)
         {
-            _treePreFab = treePreFab;
-            _branchPreFab = branchPreFab;
-            _seedXPos = seedXPos;
-            _seedYPos = seedYPos;
-
+            _treeConfig = treeConfig;
             _branches = new List<Branch>();
         }
 
         public void grow()
         {
             _height++;
-            Spawner.SpawnPrefab(_treePreFab, _seedXPos, _seedYPos + _height);
+            Spawner.SpawnPrefab(_treeConfig.treePreFab, _treeConfig.seedXPos, _treeConfig.seedYPos + _height);
 
             growBranches();
 
             int rand = Random.Range(0, 100);
-            if (rand <= 50)
+            if (rand <= _chanceOfCreatingABranch * 100)
             {
                 createBranch();
             }
@@ -39,7 +32,7 @@ namespace Assets.Scripts.TreeScripts
 
         private void createBranch()
         {
-            _branches.Add(new Branch(_branchPreFab, _height, _seedXPos));
+            _branches.Add(new Branch(_treeConfig, _height));
         }
 
         private void growBranches()

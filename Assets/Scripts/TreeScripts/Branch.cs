@@ -13,16 +13,14 @@ namespace Assets.Scripts.TreeScripts
     }
     class Branch
     {
-        private GameObject _branchPreFab;
         private BranchDirection _branchDirection;
         private float _growMagnitude = 0;
-        private float _height;
-        private float _seedXPos;
-        public Branch(GameObject branchPreFab, float height, float seedXPos = 0)
+        private float _branchBaseHeight;
+        private TreeConfig _treeConfig;
+        public Branch(TreeConfig treeConfig, float branchBaseHeight)
         {
-            _branchPreFab = branchPreFab;
-            _height = height;
-            _seedXPos = seedXPos;
+            _treeConfig = treeConfig;
+            _branchBaseHeight = branchBaseHeight;
 
             //Decide direction of branch
             if (Random.Range(0, 2) == 1)
@@ -38,7 +36,8 @@ namespace Assets.Scripts.TreeScripts
         {
             int growDirectionMultiplier = _branchDirection == BranchDirection.RIGHT ? 1 : -1;
             _growMagnitude++;
-            Spawner.SpawnPrefab(_branchPreFab, _seedXPos + _growMagnitude * growDirectionMultiplier, _height);
+
+            Spawner.SpawnPrefab(_treeConfig.branchPreFab, _treeConfig.seedXPos + (_growMagnitude * growDirectionMultiplier), _branchBaseHeight);
         }
 
     }

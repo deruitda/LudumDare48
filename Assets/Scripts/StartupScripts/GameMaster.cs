@@ -1,3 +1,4 @@
+using Assets.Scripts.TreeScripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,8 +36,16 @@ public class GameMaster : MonoBehaviour
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
 
-        TreeSpawner ts = new TreeSpawner(_treePreFab, _treePreFab, _seedXPos, _seedYPos);
-        ts.SpawnTree(15);
+        TreeConfig treeConfig = new TreeConfig
+        {
+            treePreFab = _treePreFab,
+            branchPreFab = _treePreFab,
+            seedXPos = _seedXPos,
+            seedYPos = _seedYPos
+        };
+
+        TreeSpawner ts = new TreeSpawner(treeConfig);
+        ts.SpawnTree(300);
 
     }
 

@@ -2,27 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TreeSpawner
+
+namespace Assets.Scripts.TreeScripts
 {
-    private int _nutrientScore;
-    private Assets.Scripts.TreeScripts.Tree _tree;
-
-    public TreeSpawner(GameObject treePreFab, GameObject branchPreFab, float seedXPos = 0, float seedYPos = 0)
+    public class TreeSpawner
     {
-
-        _tree = new Assets.Scripts.TreeScripts.Tree(treePreFab, branchPreFab, seedXPos, seedYPos);
-    }
-
-    public void SpawnTree(int nutrientScore)
-    {
-
-        int i = 0;
-        while (i < nutrientScore)
+        private int _nutrientScore;
+        private Tree _tree;
+        public TreeSpawner(TreeConfig treeConfig)
         {
-            _tree.grow();
-            i++;
+
+            _tree = new Tree(treeConfig);
+        }
+
+        public void SpawnTree(int nutrientScore)
+        {
+
+            int i = 0;
+            while (i < nutrientScore)
+            {
+                _tree.grow();
+                i++;
+            }
         }
     }
-
-
 }
