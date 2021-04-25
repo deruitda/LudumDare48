@@ -12,16 +12,6 @@ namespace Assets.Scripts.TreeScripts
         RIGHT
     }
 
-    class BranchBase
-    {
-        public float posX { get; }
-        public float posY { get; }
-        public BranchBase (float pPosX, float pPosY)
-        {
-            posX = pPosX;
-            posY = pPosY;
-        }
-    }
     class Branch
     {
         private BranchDirection _branchDirection;
