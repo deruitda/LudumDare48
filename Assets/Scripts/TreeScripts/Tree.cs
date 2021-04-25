@@ -5,8 +5,6 @@ namespace Assets.Scripts.TreeScripts
 {
     public class Tree
     {
-        private double _chanceOfCreatingABranch = 0.1;
-
         private List<Branch> _branches;
         private TreeConfig _treeConfig;
         private float _height;
@@ -24,7 +22,7 @@ namespace Assets.Scripts.TreeScripts
             growBranches();
 
             int rand = Random.Range(0, 100);
-            if (rand <= _chanceOfCreatingABranch * 100)
+            if (rand <= _treeConfig.chanceOfCreatingABranch * 100)
             {
                 createBranch();
             }

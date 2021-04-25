@@ -13,6 +13,8 @@ namespace Assets.Scripts.TreeScripts {
         public float seedXPos { get; set; }
         public float seedYPos { get; set; }
 
+        public double chanceOfCreatingABranch { get; set; }
+
         public TreeConfig()
         {
 

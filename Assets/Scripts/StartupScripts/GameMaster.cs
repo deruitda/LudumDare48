@@ -41,7 +41,8 @@ public class GameMaster : MonoBehaviour
             treePreFab = _treePreFab,
             branchPreFab = _treePreFab,
             seedXPos = _seedXPos,
-            seedYPos = _seedYPos
+            seedYPos = _seedYPos,
+            chanceOfCreatingABranch = 0.1
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);
