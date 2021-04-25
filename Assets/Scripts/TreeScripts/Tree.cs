@@ -30,7 +30,9 @@ namespace Assets.Scripts.TreeScripts
 
         private void createBranch()
         {
-            _branches.Add(new Branch(_treeConfig, _height));
+            BranchBase branchBase = new BranchBase(_treeConfig.seedXPos, _height);
+
+            _branches.Add(new Branch(_treeConfig, branchBase));
         }
 
         private void growBranches()

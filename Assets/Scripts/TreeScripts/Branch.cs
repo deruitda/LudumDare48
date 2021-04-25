@@ -11,16 +11,27 @@ namespace Assets.Scripts.TreeScripts
         LEFT,
         RIGHT
     }
+
+    class BranchBase
+    {
+        public float posX { get; }
+        public float posY { get; }
+        public BranchBase (float pPosX, float pPosY)
+        {
+            posX = pPosX;
+            posY = pPosY;
+        }
+    }
     class Branch
     {
         private BranchDirection _branchDirection;
         private float _growMagnitude = 0;
-        private float _branchBaseHeight;
+        private BranchBase _branchBase;
         private TreeConfig _treeConfig;
-        public Branch(TreeConfig treeConfig, float branchBaseHeight)
+        public Branch(TreeConfig treeConfig, BranchBase branchBase)
         {
             _treeConfig = treeConfig;
-            _branchBaseHeight = branchBaseHeight;
+            _branchBase = branchBase;
 
             //Decide direction of branch
             if (Random.Range(0, 2) == 1)
@@ -34,10 +45,16 @@ namespace Assets.Scripts.TreeScripts
 
         public void grow()
         {
-            int growDirectionMultiplier = _branchDirection == BranchDirection.RIGHT ? 1 : -1;
-            _growMagnitude++;
+            int rand = Random.Range(0, 100);
+            if(rand <= _treeConfig.chanceOfBranchGrowing * 100)
+            {
 
-            Spawner.SpawnPrefab(_treeConfig.branchPreFab, _treeConfig.seedXPos + (_growMagnitude * growDirectionMultiplier), _branchBaseHeight);
+                int growDirectionMultiplier = _branchDirection == BranchDirection.RIGHT ? 1 : -1;
+                _growMagnitude++;
+
+                Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchBase.posX  + (_growMagnitude * growDirectionMultiplier), _branchBase.posY);
+            }
+
         }
 
     }
