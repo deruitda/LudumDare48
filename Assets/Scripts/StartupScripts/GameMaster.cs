@@ -37,6 +37,7 @@ public class GameMaster : MonoBehaviour
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
     }
 
+    // TODO Refactor this method so we can build the neighbor graph during tile instantiation
     private void BuildTileNeighborGraph()
     {
         for (int x = 0; x < _dirtWidth; x++)

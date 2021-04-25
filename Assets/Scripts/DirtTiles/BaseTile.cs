@@ -40,11 +40,6 @@ public abstract class BaseTile : MonoBehaviour
             return;
 
         SpriteRenderer.sprite = SelecetedSprite;
-
-        foreach(var neighbor in Neighbors)
-        {
-            neighbor.Value.SpriteRenderer.color = Color.red;
-        }
     }
 
     void OnMouseExit()
@@ -53,14 +48,9 @@ public abstract class BaseTile : MonoBehaviour
             return;
 
         SpriteRenderer.sprite = DefaultSprite;
-
-        foreach (var neighbor in Neighbors)
-        {
-            neighbor.Value.SpriteRenderer.color = DefaultColor;
-        }
     }
 
-
+    // TODO: Move all this code to some other input controller class and out of the base class
     void Update()
     {
         RootTileIfClicked();
@@ -86,22 +76,34 @@ public abstract class BaseTile : MonoBehaviour
                 {
                     if (IsValidTileSelection(tile))
                     {
-                        tile.IsRooted = true;
-                        tile.SpriteRenderer.sprite = _spriteRepository.RootSprite;
-                        _gameMaster.CurrentSelectedTile = tile;
+                        DeselectTile(_gameMaster.CurrentSelectedTile);
+                        SelectTile(tile);                        
                     }
                 }
             }
         }
     }
 
+    public void SelectTile(BaseTile tile)
+    {
+        tile.IsRooted = true;
+        tile.SpriteRenderer.sprite = _spriteRepository.RootSprite;
+        _gameMaster.CurrentSelectedTile = tile;
+        tile.HighlightNeighbors();
+    }
+
+    public void DeselectTile(BaseTile tile)
+    {
+        tile.UnHighlightNeighbors();
+    }
+
     private bool IsValidTileSelection(BaseTile selectedTile)
     {
-        // if the currently selected tile is selected again, return false since we don't want to re-root it
-        if (selectedTile.PosX == _gameMaster.CurrentSelectedTile.PosX
-            && selectedTile.PosY == _gameMaster.CurrentSelectedTile.PosY)
+        // can't select already selected tile
+        if (selectedTile.IsRooted)
             return false;
 
+        // return if the tile is adjacent
         return IsTileAdjacent(selectedTile);
     }
 
@@ -123,5 +125,21 @@ public abstract class BaseTile : MonoBehaviour
                     return true;
 
         return false;
+    }
+
+    private void HighlightNeighbors()
+    {
+        foreach (var neighbor in Neighbors)
+        {
+            neighbor.Value.SpriteRenderer.color = Color.red;
+        }
+    }
+
+    private void UnHighlightNeighbors()
+    {
+        foreach (var neighbor in Neighbors)
+        {
+            neighbor.Value.SpriteRenderer.color = DefaultColor;
+        }
     }
 }
