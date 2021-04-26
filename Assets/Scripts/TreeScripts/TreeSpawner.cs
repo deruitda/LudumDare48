@@ -22,15 +22,15 @@ namespace Assets.Scripts.TreeScripts
             int multiplier = 6;
             double maxTreeGrowth = 100;
             double theoreticalMaxScore = _treeConfig.startingWater;
-            double actualScore = nutrientScore / theoreticalMaxScore * maxTreeGrowth;
+            double actualScore = (nutrientScore * maxTreeGrowth) / theoreticalMaxScore;
             // only want 2 ^ 7 end branches
             _treeConfig.minSizeOfBranchBeforeFork = actualScore / multiplier;
             _treeConfig.minSizeOfTreeBeforeForking = actualScore / multiplier;
             _treeConfig.thicknessOfLeaves = (int)actualScore / multiplier;
             double i = 0;
-            while (i < nutrientScore)
+            while (i < actualScore)
             {
-                double percentageOfTreeCreated = i == 0 ?  0 : (double)(i / nutrientScore);
+                double percentageOfTreeCreated = i == 0 ?  0 : (double)(i / actualScore);
 
                 bool withLeaves = percentageOfTreeCreated >= (1 - _treeConfig.percentageOfTreeHasLeaves);
                 _tree.grow(withLeaves);
