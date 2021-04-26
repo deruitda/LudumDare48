@@ -13,6 +13,7 @@ public abstract class BaseTile : MonoBehaviour
     public abstract Sprite DefaultSprite { get; }
     public abstract SpriteRenderer SpriteRenderer { get; set; }
     public abstract ISoilComposition SoilComposition { get; set; }
+    public abstract int MinDepthToSpawn { get; set; }
     public Dictionary<NeighborDirections, BaseTile> Neighbors { get; set; }
     protected GameMaster GameMaster;
     private const int MAX_SELECTION_DISTANCE = 1;
@@ -58,6 +59,7 @@ public abstract class BaseTile : MonoBehaviour
         SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
         GameMaster.CurrentSelectedTile = this;
         GameMaster.RootSystem.UpdateDeepestRootTile(this);
+        GameMaster.UpdateNutrientScore(SoilComposition.GetNutritionalValue());
         HighlightNeighbors();
 
         // don't update the water if we are selecting the initial root at the start of the game

@@ -8,12 +8,15 @@ public class NitrogenTile : BaseTile
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
     private int _nutritionalValue;
+    [SerializeField]
+    private int _minDepthToSpawn;
 
     private NitrogenComposition _nitrogenComposition;
     public override SpriteRenderer SpriteRenderer { get => _spriteRenderer; set => _spriteRenderer = value; }
     public override Sprite SelecetedSprite { get => GameMaster.SpriteRepo.NitrogenSelectedSprite; }
     public override Sprite DefaultSprite { get => GameMaster.SpriteRepo.NitrogenDefaultSprite; }
-    public override ISoilComposition SoilComposition { get => _nitrogenComposition; set => _nitrogenComposition = value as NitrogenComposition; }
+    public override int MinDepthToSpawn { get => _minDepthToSpawn; set => _minDepthToSpawn = value; }
+    public override ISoilComposition SoilComposition { get => _nitrogenComposition ?? new NitrogenComposition(_nutritionalValue); set => _nitrogenComposition = value as NitrogenComposition; }
 
     public NitrogenTile(int x, int y) : base(x, y)
     {
