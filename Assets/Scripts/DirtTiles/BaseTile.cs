@@ -80,12 +80,16 @@ public abstract class BaseTile : MonoBehaviour
         }
     }
 
-    public void SelectTile()
+    public void SelectTile(bool isInitialSelection = false)
     {
         IsRooted = true;
         SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
         GameMaster.CurrentSelectedTile = this;
         HighlightNeighbors();
+
+        // don't update the water if we are selecting the initial root at the start of the game
+        if(!isInitialSelection)
+            GameMaster.UpdateWaterRemaining(-1); // TODO change this from a hardcoded amount?
     }
 
     public void DeselectTile()
