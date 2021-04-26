@@ -20,10 +20,13 @@ namespace Assets.Scripts.TreeScripts
         public void SpawnTree(int nutrientScore)
         {
             int multiplier = 6;
+            double maxTreeGrowth = 100;
+            double theoreticalMaxScore = _treeConfig.startingWater;
+            double actualScore = nutrientScore / theoreticalMaxScore * maxTreeGrowth;
             // only want 2 ^ 7 end branches
-            _treeConfig.minSizeOfBranchBeforeFork = nutrientScore / multiplier;
-            _treeConfig.minSizeOfTreeBeforeForking = nutrientScore / multiplier;
-            _treeConfig.thicknessOfLeaves = nutrientScore / multiplier;
+            _treeConfig.minSizeOfBranchBeforeFork = actualScore / multiplier;
+            _treeConfig.minSizeOfTreeBeforeForking = actualScore / multiplier;
+            _treeConfig.thicknessOfLeaves = (int)actualScore / multiplier;
             double i = 0;
             while (i < nutrientScore)
             {
@@ -33,6 +36,7 @@ namespace Assets.Scripts.TreeScripts
                 _tree.grow(withLeaves);
                 i++;
             }
+
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Assets.Scripts.TreeScripts {
         public int numberOfGrowthsPerThickness { get; set; }
         public int maxAmountOfForks { get; set; }
         public int thicknessOfLeaves { get; set; }
+        public int startingWater { get; set; }
         public TreeConfig()
         {
 
