@@ -29,6 +29,10 @@ public class GameMaster : MonoBehaviour
     private GameObject _spriteRepoPrefab;
     [SerializeField]
     private Slider _waterSlider;
+    [SerializeField]
+    private Text _waterText;
+    [SerializeField]
+    private Text _scoreText;
     private const int STARTING_WATER = 5;
 
     public int WaterRemaining { get; private set; }
@@ -43,7 +47,8 @@ public class GameMaster : MonoBehaviour
     public int UpdateWaterRemaining(int amount)
     {
         WaterRemaining += amount;
-        _waterSlider.value += amount;        
+        _waterSlider.value += amount;
+        _waterText.text = WaterRemaining.ToString();
 
         if (WaterRemaining <= 0)
             GameOver();
@@ -76,7 +81,7 @@ public class GameMaster : MonoBehaviour
     public int UpdateNutrientScore(int amount)
     {
         NutritionScore += amount;
-
+        _scoreText.text = NutritionScore.ToString();
         Debug.Log($"Nutrition Score: {NutritionScore}");
 
         return NutritionScore;
@@ -85,6 +90,7 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         _waterSlider.maxValue = STARTING_WATER;
+        _waterText.text = STARTING_WATER.ToString();
         UpdateWaterRemaining(STARTING_WATER);
 
         RootSystem = new RootSystem();
