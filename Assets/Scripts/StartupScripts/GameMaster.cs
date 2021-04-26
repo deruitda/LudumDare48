@@ -77,6 +77,7 @@ public class GameMaster : MonoBehaviour
             chanceOfCreatingAFork = 0.4,
             percentageOfTreeHasLeaves = 0.3
         };
+        Destroy(Seed);
         TreeSpawner ts = new TreeSpawner(treeConfig);
         ts.SpawnTree(NutritionScore);
     }
