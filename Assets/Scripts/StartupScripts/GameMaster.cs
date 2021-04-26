@@ -37,6 +37,7 @@ public class GameMaster : MonoBehaviour
     public GameObject[,] TerrainTiles { get; set; }
     public GameObject[,] TreeTiles { get; set; }
     public GameObject Seed { get; set; }
+    public RootSystem RootSystem { get; private set; }
 
     public int UpdateWaterRemaining(int amount)
     {
@@ -53,13 +54,30 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver()
     {
-        throw new NotImplementedException();
+        TreeConfig treeConfig = new TreeConfig
+        {
+            treePreFab = _treePreFab,
+            branchPreFab = _treePreFab,
+            leavesPreFab = _leavePreFab,
+            seedXPos = _seedXPos,
+            seedYPos = _seedYPos,
+            chanceOfCreatingABranch = 0.1,
+            chanceOfBranchGrowing = 0.5,
+            minSizeOfTreeBeforeForking = 15,
+            minSizeOfBranchBeforeFork = 12,
+            chanceOfCreatingAFork = 0.4,
+            percentageOfTreeHasLeaves = 0.3
+        };
+        TreeSpawner ts = new TreeSpawner(treeConfig);
+        ts.SpawnTree(100);
     }
 
     void Start()
     {
         _waterSlider.maxValue = STARTING_WATER;
         UpdateWaterRemaining(STARTING_WATER);
+
+        RootSystem = new RootSystem();
 
         GameObject.Instantiate(_spriteRepoPrefab);
 
