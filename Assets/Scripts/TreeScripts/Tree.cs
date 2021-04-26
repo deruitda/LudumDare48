@@ -17,17 +17,25 @@ namespace Assets.Scripts.TreeScripts
         public void grow(bool withLeaves = false)
         {
             _treeGrowth++;
-            if(_forkCreated)
+            growLength(withLeaves);
+
+
+        }
+
+        private void growLength(bool withLeaves)
+        {
+            if (_forkCreated)
             {
                 _treeFork.grow(withLeaves);
             }
-            else if(_treeGrowth >= _treeConfig.minSizeOfBranchBeforeFork)
+            else if (_treeGrowth >= _treeConfig.minSizeOfBranchBeforeFork)
             {
                 int rand = Random.Range(0, 100);
-                if(rand <= 100 * _treeConfig.chanceOfCreatingAFork)
+                if (rand <= 100 * _treeConfig.chanceOfCreatingAFork)
                 {
-                   createFork();
-                } else
+                    createFork();
+                }
+                else
                 {
                     buildTrunk();
                 }

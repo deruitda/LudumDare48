@@ -62,7 +62,8 @@ public class GameMaster : MonoBehaviour
             minSizeOfTreeBeforeForking = 15,
             minSizeOfBranchBeforeFork = 12,
             chanceOfCreatingAFork = 0.4,
-            percentageOfTreeHasLeaves = 0.3
+            percentageOfTreeHasLeaves = 0.3,
+            numberOfGrowthsPerThickness = 20
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);
