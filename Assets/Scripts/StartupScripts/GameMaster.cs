@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GameMaster : MonoBehaviour
     private float _seedYPos;
     [SerializeField]
     private GameObject _spriteRepoPrefab;
+    [SerializeField]
+    private Slider _waterSlider;
     private const int STARTING_WATER = 5;
 
     public int WaterRemaining { get; private set; }
@@ -32,6 +35,7 @@ public class GameMaster : MonoBehaviour
     public int UpdateWaterRemaining(int amount)
     {
         WaterRemaining += amount;
+        _waterSlider.value += amount;        
 
         if (WaterRemaining <= 0)
             GameOver();
@@ -48,7 +52,8 @@ public class GameMaster : MonoBehaviour
 
     void Start()
     {
-        WaterRemaining = STARTING_WATER;
+        _waterSlider.maxValue = STARTING_WATER;
+        UpdateWaterRemaining(STARTING_WATER);
 
         GameObject.Instantiate(_spriteRepoPrefab);
 
@@ -59,7 +64,7 @@ public class GameMaster : MonoBehaviour
 
         BuildTileNeighborGraph();
 
-        TerrainTiles[(_dirtWidth / 2), 0].GetComponent<BaseTile>().SelectTile();
+        TerrainTiles[(_dirtWidth / 2), 0].GetComponent<BaseTile>().SelectTile(true);
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
