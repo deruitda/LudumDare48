@@ -75,5 +75,13 @@ namespace Assets.Scripts.TreeScripts
             _branch1.grow(withLeaves);
             _branch2.grow(withLeaves);
         }
+
+        public List<Branch> getBranches()
+        {
+            List<Branch> branches = new List<Branch>();
+            branches.Add(_branch1);
+            branches.Add(_branch2);
+            return branches;
+        }
     }
 }

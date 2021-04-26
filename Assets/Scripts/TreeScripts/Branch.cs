@@ -41,32 +41,39 @@ namespace Assets.Scripts.TreeScripts
 
         public void grow(bool withLeaves)
         {
-            _growMagnitude++;
-            if(_branchForked)
-            {
-                _treeFork.grow(withLeaves);
-            }
-            else if (_growMagnitude > _treeConfig.minSizeOfBranchBeforeFork)
-            {
+            //if(_branchForked)
+            //{
+            //    _treeFork.grow(withLeaves);
+            //}
+            //else if ()
+            //{
 
-                int rand = Random.Range(0, 100);
-                if (rand <= _treeConfig.chanceOfCreatingAFork * 100)
-                {
-                    createFork();
-                } else
-                {
-                    growBranch(withLeaves);
-                }
-            } else {
-                growBranch(withLeaves);
-            }
+            //    int rand = Random.Range(0, 100);
+            //    if ()
+            //    {
+            //        createFork();
+            //    } else
+            //    {
+            //        growBranch(withLeaves);
+            //    }
+            //} else {
+            //    growBranch(withLeaves);
+            //}
         }
-
-        private void growBranch(bool withLeaves)
+        public bool needsToCreateTreeFork()
+        {
+            if(_growMagnitude > _treeConfig.minSizeOfBranchBeforeFork)
+            {
+                int rand = Random.Range(0, 100);
+                return rand <= _treeConfig.chanceOfCreatingAFork * 100;
+            }
+            return false;
+        }
+        public void growBranch(bool withLeaves)
         {
 
             //grow our branches
-
+            _growMagnitude++;
             //X direction
             switch (_branchDirection)
             {
@@ -124,10 +131,11 @@ namespace Assets.Scripts.TreeScripts
             Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition1.posX, leafPosition1.posY);
             Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition2.posX, leafPosition2.posY);
         }
-        private void createFork()
+        public TreeFork createFork()
         {
             _treeFork = new TreeFork(_treeConfig, _branchDirection, _branchTip, _treeLevel + 1);
             _branchForked = true;
+            return _treeFork;
         }
 
     }

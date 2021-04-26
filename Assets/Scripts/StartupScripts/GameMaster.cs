@@ -59,15 +59,16 @@ public class GameMaster : MonoBehaviour
             seedYPos = _seedYPos,
             chanceOfCreatingABranch = 0.1,
             chanceOfBranchGrowing = 0.5,
-            minSizeOfTreeBeforeForking = 15,
-            minSizeOfBranchBeforeFork = 12,
+            minSizeOfTreeBeforeForking = 40,
+            minSizeOfBranchBeforeFork = 10,
             chanceOfCreatingAFork = 0.4,
             percentageOfTreeHasLeaves = 0.3,
-            numberOfGrowthsPerThickness = 20
+            numberOfGrowthsPerThickness = 20,
+            maxAmountOfForks = 400,
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);
-        ts.SpawnTree(100);
+        ts.SpawnTree(400);
 
     }
 
