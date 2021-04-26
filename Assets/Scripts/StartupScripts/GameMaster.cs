@@ -78,6 +78,7 @@ public class GameMaster : MonoBehaviour
             percentageOfTreeHasLeaves = 0.3,
             startingWater = StartingWater
         };
+        Destroy(Seed);
         TreeSpawner ts = new TreeSpawner(treeConfig);
         ts.SpawnTree(NutritionScore);
     }
@@ -112,7 +113,6 @@ public class GameMaster : MonoBehaviour
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
-
 
     }
 
