@@ -57,6 +57,7 @@ public abstract class BaseTile : MonoBehaviour
         IsRooted = true;
         SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
         GameMaster.CurrentSelectedTile = this;
+        GameMaster.RootSystem.UpdateDeepestRootTile(this);
         HighlightNeighbors();
 
         // don't update the water if we are selecting the initial root at the start of the game
