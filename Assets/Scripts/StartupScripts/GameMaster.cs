@@ -65,10 +65,11 @@ public class GameMaster : MonoBehaviour
             percentageOfTreeHasLeaves = 0.3,
             numberOfGrowthsPerThickness = 20,
             maxAmountOfForks = 400,
+            thicknessOfLeaves = 2
         };
 
         TreeSpawner ts = new TreeSpawner(treeConfig);
-        ts.SpawnTree(400);
+        ts.SpawnTree(20);
 
     }
 

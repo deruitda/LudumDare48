@@ -112,24 +112,28 @@ namespace Assets.Scripts.TreeScripts
         {
             BranchBase leafPosition1 = new BranchBase(_branchTip.posX, _branchTip.posY);
             BranchBase leafPosition2 = new BranchBase(_branchTip.posX, _branchTip.posY);
-            switch (_branchDirection)
+            for(var i = 0; i < _treeConfig.thicknessOfLeaves; i++)
             {
-                case BranchDirection.UP:
-                case BranchDirection.UP_LEFT:
-                case BranchDirection.UP_RIGHT:
-                    //left and right
-                    leafPosition1.addPosX();
-                    leafPosition2.subPosX();
-                    break;
-                case BranchDirection.LEFT:
-                case BranchDirection.RIGHT:
-                    leafPosition2.addPosY();
-                    leafPosition1.subPosY();
-                    break;
+                switch (_branchDirection)
+                {
+                    case BranchDirection.UP:
+                    case BranchDirection.UP_LEFT:
+                    case BranchDirection.UP_RIGHT:
+                        //left and right
+                        leafPosition1.addPosX();
+                        leafPosition2.subPosX();
+                        break;
+                    case BranchDirection.LEFT:
+                    case BranchDirection.RIGHT:
+                        leafPosition2.addPosY();
+                        leafPosition1.subPosY();
+                        break;
+                }
+
+                Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition1.posX, leafPosition1.posY);
+                Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition2.posX, leafPosition2.posY);
             }
 
-            Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition1.posX, leafPosition1.posY);
-            Spawner.SpawnPrefab(_treeConfig.leavesPreFab, leafPosition2.posX, leafPosition2.posY);
         }
         public TreeFork createFork()
         {

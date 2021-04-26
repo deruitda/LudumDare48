@@ -19,9 +19,11 @@ namespace Assets.Scripts.TreeScripts
 
         public void SpawnTree(int nutrientScore)
         {
-            // only want 2 ^ 8 end branches
-            _treeConfig.minSizeOfBranchBeforeFork = nutrientScore / 8;
-            _treeConfig.minSizeOfTreeBeforeForking = nutrientScore / 8;
+            int multiplier = 6;
+            // only want 2 ^ 7 end branches
+            _treeConfig.minSizeOfBranchBeforeFork = nutrientScore / multiplier;
+            _treeConfig.minSizeOfTreeBeforeForking = nutrientScore / multiplier;
+            _treeConfig.thicknessOfLeaves = nutrientScore / multiplier;
             double i = 0;
             while (i < nutrientScore)
             {
