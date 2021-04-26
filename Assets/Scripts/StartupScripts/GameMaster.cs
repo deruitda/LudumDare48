@@ -54,6 +54,7 @@ public class GameMaster : MonoBehaviour
         {
             treePreFab = _treePreFab,
             branchPreFab = _treePreFab,
+            leavesPreFab = _leavePreFab,
             seedXPos = _seedXPos,
             seedYPos = _seedYPos,
             chanceOfCreatingABranch = 0.1,
