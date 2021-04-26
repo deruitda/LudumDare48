@@ -33,7 +33,8 @@ public class GameMaster : MonoBehaviour
     private Text _waterText;
     [SerializeField]
     private Text _scoreText;
-    private const int STARTING_WATER = 5;
+    [SerializeField]
+    private int StartingWater;
 
     public int WaterRemaining { get; private set; }
     public int NutritionScore { get; private set; }
@@ -89,9 +90,9 @@ public class GameMaster : MonoBehaviour
 
     void Start()
     {
-        _waterSlider.maxValue = STARTING_WATER;
-        _waterText.text = STARTING_WATER.ToString();
-        UpdateWaterRemaining(STARTING_WATER);
+        _waterSlider.maxValue = StartingWater;
+        _waterText.text = StartingWater.ToString();
+        UpdateWaterRemaining(StartingWater);
 
         RootSystem = new RootSystem();
 

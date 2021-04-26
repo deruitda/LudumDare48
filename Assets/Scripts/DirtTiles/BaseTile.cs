@@ -13,6 +13,7 @@ public abstract class BaseTile : MonoBehaviour
     public abstract Sprite DefaultSprite { get; }
     public abstract SpriteRenderer SpriteRenderer { get; set; }
     public abstract ISoilComposition SoilComposition { get; set; }
+    public abstract int MinDepthToSpawn { get; set; }
     public Dictionary<NeighborDirections, BaseTile> Neighbors { get; set; }
     protected GameMaster GameMaster;
     private const int MAX_SELECTION_DISTANCE = 1;
