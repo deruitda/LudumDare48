@@ -34,6 +34,10 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
+    private Text _gameOverText;
+    [SerializeField]
+    private Text _gameOverSubtext;
+    [SerializeField]
     private int StartingWater;
 
     public bool IsGameOver { get; set; }
@@ -80,6 +84,19 @@ public class GameMaster : MonoBehaviour
         Destroy(Seed);
         TreeSpawner ts = new TreeSpawner(treeConfig);
         ts.SpawnTree(NutritionScore);
+
+        StartCoroutine(ShowGameOver());
+    }
+
+    private IEnumerator ShowGameOver()
+    {
+        _gameOverSubtext.gameObject.SetActive(true);
+        _gameOverText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        _gameOverSubtext.gameObject.SetActive(false);
+        _gameOverText.gameObject.SetActive(false);
     }
 
     public int UpdateNutrientScore(int amount)
