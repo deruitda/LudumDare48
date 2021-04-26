@@ -22,6 +22,9 @@ namespace Assets.Scripts.TreeScripts {
         public double minSizeOfBranchBeforeFork { get; set; }
         public double chanceOfCreatingAFork { get; set; }
         public double percentageOfTreeHasLeaves { get; set; }
+        public int numberOfGrowthsPerThickness { get; set; }
+        public int maxAmountOfForks { get; set; }
+        public int thicknessOfLeaves { get; set; }
         public TreeConfig()
         {
 

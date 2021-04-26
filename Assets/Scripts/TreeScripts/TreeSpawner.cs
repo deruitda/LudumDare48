@@ -19,17 +19,18 @@ namespace Assets.Scripts.TreeScripts
 
         public void SpawnTree(int nutrientScore)
         {
-
-            int i = 0;
+            int multiplier = 6;
+            // only want 2 ^ 7 end branches
+            _treeConfig.minSizeOfBranchBeforeFork = nutrientScore / multiplier;
+            _treeConfig.minSizeOfTreeBeforeForking = nutrientScore / multiplier;
+            _treeConfig.thicknessOfLeaves = nutrientScore / multiplier;
+            double i = 0;
             while (i < nutrientScore)
             {
-                if(i / nutrientScore >_treeConfig.percentageOfTreeHasLeaves)
-                {
-                    _tree.grow(true);
-                } else
-                {
-                    _tree.grow();
-                }
+                double percentageOfTreeCreated = i == 0 ?  0 : (double)(i / nutrientScore);
+
+                bool withLeaves = percentageOfTreeCreated >= (1 - _treeConfig.percentageOfTreeHasLeaves);
+                _tree.grow(withLeaves);
                 i++;
             }
         }
