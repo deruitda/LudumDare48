@@ -86,6 +86,7 @@ public abstract class BaseTile : MonoBehaviour
         SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
         GameMaster.CurrentSelectedTile = this;
         HighlightNeighbors();
+        GameMaster.UpdateWaterRemaining(-1); // TODO change this from a hardcoded amount?
     }
 
     public void DeselectTile()
