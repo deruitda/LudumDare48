@@ -114,25 +114,7 @@ public class GameMaster : MonoBehaviour
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
 
-        TreeConfig treeConfig = new TreeConfig
-        {
-            treePreFab = _treePreFab,
-            branchPreFab = _treePreFab,
-            leavesPreFab = _leavePreFab,
-            seedXPos = _seedXPos,
-            seedYPos = _seedYPos,
-            chanceOfCreatingABranch = 0.1,
-            chanceOfBranchGrowing = 0.5,
-            minSizeOfTreeBeforeForking = 15,
-            minSizeOfBranchBeforeFork = 12,
-            chanceOfCreatingAFork = 0.4,
-            percentageOfTreeHasLeaves = 0.3,
-            startingWater = StartingWater,
-            maxAmountOfForks = 1000
-        };
         Destroy(Seed);
-        TreeSpawner ts = new TreeSpawner(treeConfig);
-        ts.SpawnTree(20);
     }
 
     // TODO Refactor this method so we can build the neighbor graph during tile instantiation
