@@ -398,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1149778110}
   - component: {fileID: 1149778109}
+  - component: {fileID: 1149778111}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -421,6 +422,7 @@ MonoBehaviour:
   - {fileID: 426945897305095442, guid: a1bf4d495fd72654999eaaed15cb2a8d, type: 3}
   - {fileID: 9197912833535884252, guid: 325f69b75648f274a8a41192a5bddfd9, type: 3}
   _treePreFab: {fileID: 426945897305095442, guid: e7e093d3547851d40a60d3e8f99a8c63, type: 3}
+  _leavePreFab: {fileID: 0}
   _seedPrefab: {fileID: 3856957850513170165, guid: f30758c1113a5a34f95a811056397169, type: 3}
   _dirtWidth: 20
   _dirtDepth: 10
@@ -442,6 +444,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1149778111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149778108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9c156afae3c904999cc59a2b3812e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1487186539
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,8 +641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -827, y: 267}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: -480.0945, y: 120.66156}
+  m_SizeDelta: {x: 164.6769, y: 37.811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629169725
 MonoBehaviour:
