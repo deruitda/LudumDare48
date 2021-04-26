@@ -80,7 +80,8 @@ public class GameMaster : MonoBehaviour
             minSizeOfBranchBeforeFork = 12,
             chanceOfCreatingAFork = 0.4,
             percentageOfTreeHasLeaves = 0.3,
-            startingWater = StartingWater
+            startingWater = StartingWater,
+            maxAmountOfForks = 1000
         };
         Destroy(Seed);
         TreeSpawner ts = new TreeSpawner(treeConfig);
