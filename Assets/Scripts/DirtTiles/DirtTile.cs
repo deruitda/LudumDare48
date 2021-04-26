@@ -10,7 +10,7 @@ public class DirtTile : BaseTile
     private int _nutritionalValue;   
     private DirtComposition _dirtComposition;
 
-    public override ISoilComposition SoilComposition { get => _dirtComposition; set => _dirtComposition = value as DirtComposition; }
+    public override ISoilComposition SoilComposition { get => _dirtComposition ?? new DirtComposition(_nutritionalValue); set => _dirtComposition = value as DirtComposition; }
     public override SpriteRenderer SpriteRenderer { get => _spriteRenderer; set => _spriteRenderer = value; }
     public override Sprite SelecetedSprite { get => GameMaster.SpriteRepo.DirtSelectedSprite; }
     

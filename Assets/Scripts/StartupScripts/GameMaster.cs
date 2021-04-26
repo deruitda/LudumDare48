@@ -32,6 +32,7 @@ public class GameMaster : MonoBehaviour
     private const int STARTING_WATER = 5;
 
     public int WaterRemaining { get; private set; }
+    public int NutritionScore { get; private set; }
     public SpriteRepository SpriteRepo { get; private set; }
     public BaseTile CurrentSelectedTile { get; set; }
     public GameObject[,] TerrainTiles { get; set; }
@@ -69,7 +70,16 @@ public class GameMaster : MonoBehaviour
             percentageOfTreeHasLeaves = 0.3
         };
         TreeSpawner ts = new TreeSpawner(treeConfig);
-        ts.SpawnTree(100);
+        ts.SpawnTree(NutritionScore);
+    }
+
+    public int UpdateNutrientScore(int amount)
+    {
+        NutritionScore += amount;
+
+        Debug.Log($"Nutrition Score: {NutritionScore}");
+
+        return NutritionScore;
     }
 
     void Start()
