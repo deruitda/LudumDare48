@@ -36,6 +36,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private int StartingWater;
 
+    public bool IsGameOver { get; set; }
     public int WaterRemaining { get; private set; }
     public int NutritionScore { get; private set; }
     public SpriteRepository SpriteRepo { get; private set; }
@@ -61,6 +62,7 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver()
     {
+        IsGameOver = true;
         TreeConfig treeConfig = new TreeConfig
         {
             treePreFab = _treePreFab,

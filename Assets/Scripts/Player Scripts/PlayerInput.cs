@@ -31,14 +31,16 @@ public void ClickEvent(){
             if (hit.collider != null)
             {
                 BaseTile tile = hit.collider.gameObject.GetComponent<BaseTile>();
-
-                // if we hit a tile, root it
-                if (tile != null)
+                if (!GameMaster.IsGameOver)
                 {
-                    if (tile.IsValidTileSelection())
+                    // if we hit a tile, root it
+                    if (tile != null)
                     {
-                        GameMaster.CurrentSelectedTile.DeselectTile();
-                        tile.SelectTile();
+                        if (tile.IsValidTileSelection())
+                        {
+                            GameMaster.CurrentSelectedTile.DeselectTile();
+                            tile.SelectTile();
+                        }
                     }
                 }
             }
