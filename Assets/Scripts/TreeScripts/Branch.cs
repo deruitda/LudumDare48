@@ -27,12 +27,16 @@ namespace Assets.Scripts.TreeScripts
         private TreeConfig _treeConfig;
         private TreeFork _treeFork;
         private bool _branchForked = false;
-        public Branch(TreeConfig treeConfig, BranchBase branchBase, BranchDirection branchDirection)
+        private int _treeLevel;
+        private int _branchGrowth;
+        public Branch(TreeConfig treeConfig, BranchBase branchBase, BranchDirection branchDirection, int treeLevel)
         {
             _treeConfig = treeConfig;
             _branchBase = branchBase;
             _branchDirection = branchDirection;
             _branchTip = new BranchBase(branchBase.posX, branchBase.posY);
+            _treeLevel = treeLevel;
+            _branchGrowth = 0;
         }
 
         public void grow(bool withLeaves)
@@ -88,10 +92,13 @@ namespace Assets.Scripts.TreeScripts
 
             Spawner.SpawnPrefab(_treeConfig.branchPreFab, _branchTip.posX, _branchTip.posY);
 
+            _branchGrowth++;
+
             if(withLeaves)
             {
                 growLeaves();
             }
+
         }
 
         private void growLeaves()
@@ -119,7 +126,7 @@ namespace Assets.Scripts.TreeScripts
         }
         private void createFork()
         {
-            _treeFork = new TreeFork(_treeConfig, _branchDirection, _branchTip);
+            _treeFork = new TreeFork(_treeConfig, _branchDirection, _branchTip, _treeLevel + 1);
             _branchForked = true;
         }
 

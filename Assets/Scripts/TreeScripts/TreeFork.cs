@@ -16,13 +16,13 @@ namespace Assets.Scripts.TreeScripts
         private Branch _branch1;
         private Branch _branch2;
 
-        public TreeFork(TreeConfig treeConfig, BranchDirection baseBranchDirection, BranchBase branchBase)
+        public TreeFork(TreeConfig treeConfig, BranchDirection baseBranchDirection, BranchBase branchBase, int treeLevel)
         {
             _treeConfig = treeConfig;
             _baseBranchDirection = baseBranchDirection;
             _branchBase = branchBase;
 
-            createBranches();
+            createBranches(treeLevel);
         }
 
         private List<BranchDirection> getPossibleBranchDirections()
@@ -53,18 +53,18 @@ namespace Assets.Scripts.TreeScripts
 
             return possibleBranchDirections;
         }
-        private void createBranches()
+        private void createBranches(int treeLevel)
         {
             List<BranchDirection> possibleBranchDirections = getPossibleBranchDirections();
 
             int random = UnityEngine.Random.Range(0, possibleBranchDirections.Count());
             BranchDirection firstBranchDirection = possibleBranchDirections[random];
-            _branch1 = new Branch(_treeConfig, _branchBase, firstBranchDirection);
+            _branch1 = new Branch(_treeConfig, _branchBase, firstBranchDirection, treeLevel);
             possibleBranchDirections.Remove(firstBranchDirection);
 
             int random2 = UnityEngine.Random.Range(0, possibleBranchDirections.Count());
             BranchDirection secondBranchDirection = possibleBranchDirections[random2];
-            _branch2 = new Branch(_treeConfig, _branchBase, secondBranchDirection);
+            _branch2 = new Branch(_treeConfig, _branchBase, secondBranchDirection, treeLevel);
         }
         public void grow(bool withLeaves)
         {
