@@ -58,7 +58,7 @@ public static class Spawner
         if (IterationsSincePhos >= IterationsUntilPhos)
         {
             IterationsSincePhos = 0;
-            IterationsUntilPhos = Random.Range(20, 50);
+            IterationsUntilPhos = Random.Range(100, 150);
             return gameObjects[10];
         }
 

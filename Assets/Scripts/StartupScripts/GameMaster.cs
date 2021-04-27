@@ -40,6 +40,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private int StartingWater;
 
+    private int WaterGained = 0;
     public bool IsGameOver { get; set; }
     public int WaterRemaining { get; private set; }
     public int NutritionScore { get; private set; }
@@ -55,6 +56,7 @@ public class GameMaster : MonoBehaviour
         WaterRemaining += amount;
         _waterSlider.value += amount;
         _waterText.text = WaterRemaining.ToString();
+        WaterGained += amount;
 
         if (WaterRemaining <= 0)
             GameOver();
@@ -80,7 +82,7 @@ public class GameMaster : MonoBehaviour
             minSizeOfBranchBeforeFork = 12,
             chanceOfCreatingAFork = 0.4,
             percentageOfTreeHasLeaves = 0.3,
-            startingWater = StartingWater,
+            startingWater = StartingWater + WaterGained,
             maxAmountOfForks = 1000
         };
         Destroy(Seed);
