@@ -131,8 +131,6 @@ public class GameMaster : MonoBehaviour
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);
-
-        Destroy(Seed);
     }
 
     // TODO Refactor this method so we can build the neighbor graph during tile instantiation
