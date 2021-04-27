@@ -9,4 +9,6 @@ public class SpriteRepository : MonoBehaviour
     public Sprite DirtSelectedSprite;
     public Sprite NitrogenDefaultSprite;
     public Sprite NitrogenSelectedSprite;
+    public Sprite WaterDefaultSprite;
+    public Sprite WaterSelectedSprite;
 }

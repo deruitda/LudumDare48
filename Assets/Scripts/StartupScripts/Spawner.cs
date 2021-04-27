@@ -5,12 +5,14 @@ using UnityEngine;
 
 public static class Spawner
 {
+    private static int IterationsUntilWater = 100;
+    private static int IterationsSinceWater = 0;
     public static GameObject[,] SpawnDirtTerrain(List<GameObject> prefabs, int width, int depth)
     {
         GameObject[,] terrainTiles = new GameObject[width, depth];
         Dictionary<int, GameObject> prefabsByDepth = new Dictionary<int, GameObject>();
 
-        foreach(var prefab in prefabs)
+        foreach (var prefab in prefabs)
         {
             var minDepth = prefab.GetComponent<BaseTile>().MinDepthToSpawn;
             prefabsByDepth.Add(minDepth, prefab);
@@ -35,7 +37,7 @@ public static class Spawner
     {
         var gO = GameObject.Instantiate(prefab);
         gO.transform.position = new Vector2(xPos, yPos);
-        
+
         return gO;
     }
 
@@ -44,22 +46,22 @@ public static class Spawner
     {
         Dictionary<int, GameObject> filteredObjects = new Dictionary<int, GameObject>();
 
-        int i = 0;
-        foreach(var gO in gameObjects)
+        if (IterationsSinceWater >= IterationsUntilWater)
         {
-            if (gO.Key <= depth)
+            IterationsSinceWater = 0;
+            IterationsUntilWater = Random.Range(100, 250);
+            return gameObjects[-1];
+        }
+
+        int i = 0;
+        foreach (var gO in gameObjects)
+        {
+            if (gO.Key != -1 && gO.Key <= depth)
                 filteredObjects.Add(i++, gO.Value);
         }
 
         int rand = Random.Range(0, filteredObjects.Count);
-        try
-        {
-            return filteredObjects[rand];
-        }
-        catch (System.Exception ex)
-        {
-
-            throw ex;
-        }
+        IterationsSinceWater++;
+        return filteredObjects[rand];
     }
 }
