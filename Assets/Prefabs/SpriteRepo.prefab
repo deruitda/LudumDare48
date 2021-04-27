@@ -50,3 +50,5 @@ MonoBehaviour:
   NitrogenSelectedSprite: {fileID: 21300000, guid: 8ac4d56005af357479457f40bc564f1d, type: 3}
   WaterDefaultSprite: {fileID: 21300000, guid: 37e224ce5eafb184592fed46bccab15a, type: 3}
   WaterSelectedSprite: {fileID: 21300000, guid: 37e224ce5eafb184592fed46bccab15a, type: 3}
+  PhosphorusSelectedSprite: {fileID: 21300000, guid: bc515477eef4e414f96a8d7dfe10fe5c, type: 3}
+  PhosphorusDefaultSprite: {fileID: 21300000, guid: c69210f0b96beaa4bb45a09189003fbc, type: 3}

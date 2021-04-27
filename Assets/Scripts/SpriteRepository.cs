@@ -11,4 +11,6 @@ public class SpriteRepository : MonoBehaviour
     public Sprite NitrogenSelectedSprite;
     public Sprite WaterDefaultSprite;
     public Sprite WaterSelectedSprite;
+    public Sprite PhosphorusSelectedSprite;
+    public Sprite PhosphorusDefaultSprite;
 }
