@@ -6,10 +6,12 @@ public class MainCamera : MonoBehaviour
 {
     public float moveSpeed = 4f;
     private float zoomSize = 5;
+    private float _defaultZoom;
+    public Camera mainCam;
     // Start is called before the first frame update
     void Start()
     {
-
+        _defaultZoom = mainCam.orthographicSize;
     }
 
     // Update is called once per frame
@@ -17,13 +19,12 @@ public class MainCamera : MonoBehaviour
     {
         int startingPoint = 3;
         int increment = 10;
-        float defaultZoom = 4.600302f;
-        var a = GetComponent<Camera>().orthographicSize;
-        float zoom = transform.position.y + defaultZoom / increment;
+        var a = mainCam.orthographicSize;
+        float zoom = transform.position.y + _defaultZoom / increment;
 
         if (zoom < startingPoint)
         {
-            zoom = defaultZoom;
+            zoom = _defaultZoom;
         }
 
         if (Input.GetKey(KeyCode.W)) 
