@@ -48,7 +48,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1651372750881138715}
   _nutritionalValue: 0
   _minDepthToSpawn: 0
-  _probability: 75
+  _probability: 85
 --- !u!61 &5773488181609148393
 BoxCollider2D:
   m_ObjectHideFlags: 0

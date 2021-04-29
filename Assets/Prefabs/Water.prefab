@@ -74,7 +74,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 4180890833874534008}
   _nutritionalValue: 0
   _minDepthToSpawn: 7
-  _probability: 3
+  _probability: 0
 --- !u!1 &8427914519403904513
 GameObject:
   m_ObjectHideFlags: 0

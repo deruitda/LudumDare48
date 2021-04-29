@@ -90,7 +90,7 @@ public static class Spawner
 
     private static int GetRandomWaterSpawnLimit()
     {
-        return UnityEngine.Random.Range(100, 150);
+        return UnityEngine.Random.Range(200, 300);
     }
 
     private class TerrainPrefabProbability
