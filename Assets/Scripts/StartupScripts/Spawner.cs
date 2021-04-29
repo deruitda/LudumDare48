@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class Spawner
 {
-    private static int IterationsUntilWater = 250;
+    private static int IterationsUntilWater = GetRandomWaterSpawnLimit(); 
     private static int IterationsSinceWater = 0;
     public static GameObject[,] SpawnDirtTerrain(List<GameObject> prefabs, int width, int depth)
     {
@@ -16,6 +16,11 @@ public static class Spawner
         foreach (var prefab in prefabs)
         {
             var tileInfo = prefab.GetComponent<BaseTile>();
+
+            // don't include water tiles in random terrain gen
+            if (tileInfo is WaterTile)
+                continue;
+
             prefabProbabilities.Add(new TerrainPrefabProbability
             {
                 Depth = tileInfo.MinDepthToSpawn,
@@ -24,10 +29,22 @@ public static class Spawner
             });
         }
 
-        for (int w = 0; w < width; w++)
-            for (int d = 0; d < depth; d++)
+        for (int d = 0; d < depth; d++)
+            for (int w = 0; w < width; w++)
             {
-                var prefab = GetRandomTerrainPrefab(prefabProbabilities, d);
+                GameObject prefab;
+
+                if (IterationsSinceWater >= IterationsUntilWater && depth > 7)
+                {
+                    IterationsSinceWater = 0;
+                    IterationsUntilWater = GetRandomWaterSpawnLimit();
+                    prefab = prefabs.FirstOrDefault(t => t.GetComponent<BaseTile>() is WaterTile);
+                }
+                else
+                {
+                    prefab = GetRandomTerrainPrefab(prefabProbabilities, d);
+                }
+
                 var gO = GameObject.Instantiate(prefab);
                 gO.transform.position = new Vector2(w, -d);
                 var tile = gO.GetComponent<BaseTile>();
@@ -49,34 +66,31 @@ public static class Spawner
 
     private static GameObject GetRandomTerrainPrefab(List<TerrainPrefabProbability> terrainPrefabProbabilities, int depth)
     {
-        if(IterationsSinceWater >= IterationsUntilWater && depth > 7)
-        {
-            IterationsSinceWater = 0;
-            return terrainPrefabProbabilities.FirstOrDefault(t => t.TerrainPrefab.GetComponent<BaseTile>() is WaterTile).TerrainPrefab;
-        }
-
         List<TerrainPrefabProbability> filteredTerrainProbability = terrainPrefabProbabilities.Where(t => t.Depth <= depth).ToList();
 
         // cdf = cumulative density function: https://stackoverflow.com/questions/4463561/weighted-random-selection-from-array
         int cdf = filteredTerrainProbability.Sum(fs => fs.Probability);
 
         List<int> list = new List<int>();
-        for (int i = 0; i < 100; i++)
-        {
-            int rand = UnityEngine.Random.Range(0, cdf);
-            foreach (var terrainPrefabProbability in filteredTerrainProbability)
-            {
-                if (rand <= terrainPrefabProbability.Probability)
-                {
-                    IterationsSinceWater++;
-                    return terrainPrefabProbability.TerrainPrefab;
-                }
 
-                rand -= terrainPrefabProbability.Probability;
+        int rand = UnityEngine.Random.Range(0, cdf);
+        foreach (var terrainPrefabProbability in filteredTerrainProbability)
+        {
+            if (rand <= terrainPrefabProbability.Probability)
+            {
+                IterationsSinceWater++;
+                return terrainPrefabProbability.TerrainPrefab;
             }
+
+            rand -= terrainPrefabProbability.Probability;
         }
 
         throw new Exception("Unable to select random prefab");
+    }
+
+    private static int GetRandomWaterSpawnLimit()
+    {
+        return UnityEngine.Random.Range(100, 150);
     }
 
     private class TerrainPrefabProbability
