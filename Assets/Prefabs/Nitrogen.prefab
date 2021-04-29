@@ -156,3 +156,4 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7828249225560338133}
   _nutritionalValue: 1
   _minDepthToSpawn: 3
+  _probability: 15
