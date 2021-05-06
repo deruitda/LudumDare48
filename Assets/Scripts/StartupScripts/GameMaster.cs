@@ -148,17 +148,12 @@ public class GameMaster : MonoBehaviour
                 if (x > 0)
                     currentTile.Neighbors[NeighborDirections.LEFT] = TerrainTiles[x - 1, y].GetComponent<BaseTile>();
 
-                if (x > 0 && y < _dirtDepth - 1)
-                    currentTile.Neighbors[NeighborDirections.LEFT_BOTTOM] = TerrainTiles[x - 1, y + 1].GetComponent<BaseTile>();
-
                 if (y < _dirtDepth - 1)
                     currentTile.Neighbors[NeighborDirections.MIDDLE_BOTTOM] = TerrainTiles[x, y + 1].GetComponent<BaseTile>();
 
                 if (x < _dirtWidth - 1)
                     currentTile.Neighbors[NeighborDirections.RIGHT] = TerrainTiles[x + 1, y].GetComponent<BaseTile>();
-                
-                if(x < _dirtWidth - 1 && y < _dirtDepth - 1)
-                    currentTile.Neighbors[NeighborDirections.RIGHT_BOTTOM] = TerrainTiles[x + 1, y + 1].GetComponent<BaseTile>();
+               
             }
         }
     }

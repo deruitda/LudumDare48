@@ -93,15 +93,12 @@ public abstract class BaseTile : MonoBehaviour
         int currentX = GameMaster.CurrentSelectedTile.PosX;
         int currentY = GameMaster.CurrentSelectedTile.PosY;
 
-        // if the tile is too far away, return false;
-        if (Mathf.Abs(selectedX - currentX) > MAX_SELECTION_DISTANCE
-            || Mathf.Abs(selectedY - currentY) > MAX_SELECTION_DISTANCE)
-            return false;
+        if ((selectedX == (currentX - 1) || selectedX == (currentX + 1))
+            && (selectedY == currentY))
+            return true;
 
-        for (int x = currentX - MAX_SELECTION_DISTANCE; x <= currentX + MAX_SELECTION_DISTANCE; x++)
-            for (int y = currentY; y <= currentY + MAX_SELECTION_DISTANCE; y++)
-                if (x == selectedX && y == selectedY)
-                    return true;
+        if (selectedX == currentX && selectedY == currentY + 1)
+            return true;
 
         return false;
     }
