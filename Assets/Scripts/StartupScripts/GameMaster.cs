@@ -129,7 +129,7 @@ public class GameMaster : MonoBehaviour
 
         BuildTileNeighborGraph();
 
-        TerrainTiles[(_dirtWidth / 2), 0].GetComponent<BaseTile>().SelectTile(true);
+        TerrainTiles[(_dirtWidth / 2), 0].GetComponent<BaseTile>().SelectDirtTile(true);
 
         // spawn de seed
         Seed = Spawner.SpawnPrefab(_seedPrefab, _seedXPos, _seedYPos);

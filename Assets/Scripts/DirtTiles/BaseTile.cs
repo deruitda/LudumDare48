@@ -54,12 +54,13 @@ public abstract class BaseTile : MonoBehaviour
 
     }
 
-    public void SelectTile(bool isInitialSelection = false)
+    public void SelectDirtTile(bool isInitialSelection = false)
     {
         IsRooted = true;
         SpriteRenderer.sprite = GameMaster.SpriteRepo.RootSprite;
         GameMaster.CurrentSelectedTile = this;
-        GameMaster.RootSystem.UpdateDeepestRootTile(this);
+        //GameMaster.RootSystem.UpdateDeepestRootTile(this);
+        GameMaster.RootSystem.AddRootToRootSystem(this);
         if (this.GetType() == typeof(WaterTile))
             GameMaster.UpdateWaterRemaining(10);
         else if(!isInitialSelection)
@@ -68,19 +69,26 @@ public abstract class BaseTile : MonoBehaviour
             GameMaster.UpdateWaterRemaining(-1); // TODO change this from a hardcoded amount?
         }
         GameMaster.UpdateNutrientScore(SoilComposition.GetNutritionalValue());
-        HighlightNeighbors();
+        HighlightSelectableTiles();
+    }
+
+    public void SelectRootTile()
+    {
+
+        GameMaster.CurrentSelectedTile = this;
+        HighlightSelectableTiles();
     }
 
     public void DeselectTile()
     {
-        UnHighlightNeighbors();
+        UnhighlightSelectableTiles();
     }
 
     public bool IsValidTileSelection()
     {
-        // can't select already selected tile
-        if (IsRooted)
-            return false;
+        // reselect root
+        if (IsRooted)        
+            return true;        
 
         // return if the tile is adjacent
         return IsTileAdjacentToCurrent();
@@ -103,12 +111,40 @@ public abstract class BaseTile : MonoBehaviour
         return false;
     }
 
+    private void HighlightSelectableTiles()
+    {
+        HighlightNeighbors();
+        HighlightRoots();
+    }
+
+    private void HighlightRoots()
+    {
+        foreach(var root in GameMaster.RootSystem.GetRoots())
+        {
+            root.SpriteRenderer.color = new Color(92, 252, 71, .5f);
+        }
+    }
+
     private void HighlightNeighbors()
     {
         foreach (var neighbor in Neighbors)
         {
             if (!neighbor.Value.IsRooted)
                 neighbor.Value.SpriteRenderer.color = new Color(92, 252, 71, .5f);
+        }
+    }
+
+    private void UnhighlightSelectableTiles()
+    {
+        UnHighlightNeighbors();
+        UnHighlightRoots();
+    }
+
+    private void UnHighlightRoots()
+    {
+        foreach (var root in GameMaster.RootSystem.GetRoots())
+        {
+            root.SpriteRenderer.color = DefaultColor;
         }
     }
 

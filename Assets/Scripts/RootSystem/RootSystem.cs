@@ -7,6 +7,17 @@ using UnityEngine;
 public class RootSystem : MonoBehaviour
 {
     public BaseTile DeepestTile { get; private set; }
+    private List<BaseTile> _roots;
+
+    public RootSystem()
+    {
+        _roots = new List<BaseTile>();
+    }
+
+    public List<BaseTile> GetRoots()
+    {
+        return _roots;
+    }
 
     public void UpdateDeepestRootTile(BaseTile tile)
     {
@@ -14,5 +25,10 @@ public class RootSystem : MonoBehaviour
         {
             DeepestTile = tile;
         }
+    }
+
+    public void AddRootToRootSystem(BaseTile tile)
+    {
+        _roots.Add(tile);
     }
 }

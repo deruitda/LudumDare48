@@ -39,7 +39,11 @@ public void ClickEvent(){
                         if (tile.IsValidTileSelection())
                         {
                             GameMaster.CurrentSelectedTile.DeselectTile();
-                            tile.SelectTile();
+
+                            if (tile.IsRooted)
+                                tile.SelectRootTile();
+                            else
+                                tile.SelectDirtTile();
                         }
                     }
                 }
